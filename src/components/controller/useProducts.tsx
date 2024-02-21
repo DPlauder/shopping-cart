@@ -21,6 +21,13 @@ export default function useProducts() {
         setErr(error as Error);
       }
     })();
-  }, [setProducts]);
-  return [products, err];
+  }, []);
+  async function getProduct(id: string) {
+    let product: IProduct = await fetch(
+      `https://fakestoreapi.com/products/${id}`
+    ).then((res) => res.json());
+    return product;
+  }
+
+  return [products, err, getProduct];
 }
