@@ -2,17 +2,14 @@ import { useState, useEffect } from "react";
 import { IProduct } from "../ts/interfaces/global_interfaces";
 
 export default function useProducts() {
-  const [products, setProducts] = useState([{}]);
+  //TODO: Du hast ein Objekt in das Array initial erstellt, das ist nicht notwendig und hat den Fehler ausgelöst.
+  const [products, setProducts] = useState<IProduct[]>([]);
   const [err, setErr] = useState<Error | null>(null);
 
   useEffect(() => {
-    const options = {
-      method: "GET",
-      header: { "Content-Type": "application/json" },
-    };
     (async () => {
       try {
-        const data = await fetch("https://fakestoreapi.com/products", options);
+        const data = await fetch("https://fakestoreapi.com/products");
         if (!data.ok) {
           throw new Error("Sorry, we couldn't connect to our server!");
         }
@@ -22,5 +19,6 @@ export default function useProducts() {
       }
     })();
   }, []);
+
   return [products, err];
 }
