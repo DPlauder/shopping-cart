@@ -7,7 +7,7 @@ interface Props {
 
 export default function Product({ product }: Props) {
   return (
-    <Grid item key={product.id}>
+    <Grid item key={product.id} xs={3}>
       <Card>
         <CardContent>
           <img src={product.image} />
@@ -18,10 +18,10 @@ export default function Product({ product }: Props) {
             {product.price}
           </Typography>
         </CardContent>
+        <IconButton>
+          <AddShoppingCartIcon />
+        </IconButton>
       </Card>
-      <IconButton>
-        <AddShoppingCartIcon />
-      </IconButton>
     </Grid>
   );
 }

@@ -21,6 +21,6 @@ export default function useProducts() {
         setErr(error as Error);
       }
     })();
-  }, []);
+  }, [setProducts]);
   return [products, err];
 }

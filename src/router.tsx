@@ -10,7 +10,6 @@ export default function Router() {
       element: <RootElement />,
       children: [
         { index: true, element: <Home /> },
-        /* { path: "/home", element: "/" }, */
         {
           path: "/shop",
           element: <Shop />,
