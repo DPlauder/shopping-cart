@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { IProduct } from "../ts/interfaces/global_interfaces";
 
 export default function useProducts() {
-  //TODO: Du hast ein Objekt in das Array initial erstellt, das ist nicht notwendig und hat den Fehler ausgelöst.
-  const [products, setProducts] = useState<IProduct[]>([]);
+  //TODO: Du hast ein leeres Objekt in das Array initial erstellt, das ist nicht notwendig und hat den Fehler ausgelöst.
+  const [products, setProducts] = useState<IProduct[]>([]); //({}) = Problem
   const [err, setErr] = useState<Error | null>(null);
 
   useEffect(() => {
