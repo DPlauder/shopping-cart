@@ -2,6 +2,8 @@ import { IProduct } from "../ts/interfaces/global_interfaces";
 import { getProduct } from "../controller/handleProducts";
 import { useLoaderData, NavLink } from "react-router-dom";
 import { Card, CardContent, Typography, Box, Button } from "@mui/material";
+import CartItemContext from "../controller/CartContext";
+import { useContext } from "react";
 
 export async function loader({ params }: { params: { id: string } }) {
   const product = await (getProduct as (id: string) => Promise<IProduct>)(
@@ -18,6 +20,7 @@ export async function loader({ params }: { params: { id: string } }) {
 
 export default function ProductDetail() {
   const { product } = useLoaderData();
+  const [, , handleAdd] = useContext(CartItemContext);
 
   return (
     <Card>
@@ -29,7 +32,7 @@ export default function ProductDetail() {
           <Typography>{product.title}</Typography>
           <Typography>{product.description}</Typography>
           <Typography>{`€ ${product.price}`}</Typography>
-          <Button>Add to Cart</Button>
+          <Button onClick={() => handleAdd(product)}>Add to Cart</Button>
           <NavLink to={"/shop"}>
             <Button>Back to Shop</Button>
           </NavLink>

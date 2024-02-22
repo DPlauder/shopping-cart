@@ -17,13 +17,21 @@ export default function CartItemsProvider({ children }: Props) {
     if (index === -1) {
       cartItem.ammount = 1;
       clone.push(cartItem);
-    } else if (index !== -1) {
+    }
+    if (index !== -1 && index !== undefined) {
       clone[index].ammount += 1;
     }
     setCartItems(clone);
   }
+  function handleDelete(cartItem: IProduct) {
+    setCartItems((prevItem) =>
+      prevItem.filter((prevItem) => prevItem.id !== cartItem.id)
+    );
+  }
   return (
-    <CartItemContext.Provider value={[cartItems, setCartItems, handleAdd]}>
+    <CartItemContext.Provider
+      value={[cartItems, setCartItems, handleAdd, handleDelete]}
+    >
       {children}
     </CartItemContext.Provider>
   );

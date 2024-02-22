@@ -8,14 +8,15 @@ import {
   TableCell,
   TableBody,
   Typography,
+  Button,
 } from "@mui/material";
 import { IProduct } from "../ts/interfaces/global_interfaces";
 
 export default function Cart() {
-  const [cartItems] = useContext(CartItemContext);
+  const [cartItems, , handleAdd, handleDelete] = useContext(CartItemContext);
   return (
     <Container>
-      <h1>Hello Cart</h1>
+      <Typography>My Cart</Typography>
       <Table>
         <TableHead>
           <TableRow>
@@ -36,7 +37,9 @@ export default function Cart() {
                 <TableCell>{item.title}</TableCell>
                 <TableCell>{item.ammount}</TableCell>
                 <TableCell>{`€ ${item.price! * item.ammount!}`}</TableCell>
-                <TableCell>Delete</TableCell>
+                <TableCell>
+                  <Button onClick={() => handleDelete(item)}>Delete</Button>
+                </TableCell>
               </TableRow>
             );
           })}

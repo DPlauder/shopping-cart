@@ -1,6 +1,5 @@
 import { Container, Typography, Grid, Button } from "@mui/material";
 import { Outlet, NavLink, Link } from "react-router-dom";
-import CartItemContext from "../controller/CartContext";
 
 export default function RootElement() {
   return (
