@@ -1,5 +1,6 @@
 import { IProduct } from "../ts/interfaces/global_interfaces";
 import useProducts from "../controller/useProducts";
+import { redirect } from "react-router-dom";
 
 export async function loader({ params }: { params: { id: string } }) {
   const [, , getProduct] = useProducts();
@@ -12,6 +13,7 @@ export async function loader({ params }: { params: { id: string } }) {
       statusText: "Not Found",
     });
   }
+  //return redirect(`/shop/${params.id}`);
   return { product };
 }
 
@@ -19,6 +21,7 @@ export default function ProductDetail() {
   return (
     <>
       <h1>hello detail</h1>
+      <p>{}</p>
     </>
   );
 }

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { IProduct } from "../ts/interfaces/global_interfaces";
 
 export default function useProducts() {
-  const [products, setProducts] = useState([{}]);
+  const [products, setProducts] = useState<IProduct[]>([]);
   const [err, setErr] = useState<Error | null>(null);
 
   useEffect(() => {

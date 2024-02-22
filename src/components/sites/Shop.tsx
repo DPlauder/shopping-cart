@@ -9,7 +9,7 @@ export default function Shop() {
     return <Container>{(err as Error).message}</Container>;
   } else {
     return (
-      <Grid container spacing={2}>
+      <Grid container spacing={4} mt={"50px"}>
         {(products as IProduct[]).map((product: IProduct): JSX.Element => {
           return <ProductItem key={product.id} product={product} />;
         })}
