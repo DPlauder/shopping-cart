@@ -1,9 +1,9 @@
 import { IProduct } from "../ts/interfaces/global_interfaces";
-import useProducts from "../controller/useProducts";
-import { redirect } from "react-router-dom";
+import { getProduct } from "../controller/handleProducts";
+import { useLoaderData, NavLink } from "react-router-dom";
+import { Card, CardContent, Typography, Box, Button } from "@mui/material";
 
 export async function loader({ params }: { params: { id: string } }) {
-  const [, , getProduct] = useProducts();
   const product = await (getProduct as (id: string) => Promise<IProduct>)(
     params.id
   );
@@ -13,15 +13,28 @@ export async function loader({ params }: { params: { id: string } }) {
       statusText: "Not Found",
     });
   }
-  //return redirect(`/shop/${params.id}`);
   return { product };
 }
 
 export default function ProductDetail() {
+  const { product } = useLoaderData();
+
   return (
-    <>
-      <h1>hello detail</h1>
-      <p>{}</p>
-    </>
+    <Card>
+      <CardContent sx={{ display: "flex", flexDirection: "row", gap: "30px" }}>
+        <Box>
+          <img src={product.image} width={300} />
+        </Box>
+        <Box>
+          <Typography>{product.title}</Typography>
+          <Typography>{product.description}</Typography>
+          <Typography>{`€ ${product.price}`}</Typography>
+          <Button>Add to Cart</Button>
+          <NavLink to={"/shop"}>
+            <Button>Back to Shop</Button>
+          </NavLink>
+        </Box>
+      </CardContent>
+    </Card>
   );
 }

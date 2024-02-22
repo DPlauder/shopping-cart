@@ -2,11 +2,15 @@ import { IProduct } from "../ts/interfaces/global_interfaces";
 import { Typography, Card, CardContent, IconButton, Grid } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import CartItemContext from "../controller/CartContext";
+
 interface Props {
   product: IProduct;
 }
 
 export default function ProductItem({ product }: Props) {
+  const [, , handleAdd] = useContext(CartItemContext);
   return (
     <Grid item xs={3}>
       <Card>
@@ -25,7 +29,7 @@ export default function ProductItem({ product }: Props) {
             {`€ ${product.price}`}
           </Typography>
         </CardContent>
-        <IconButton>
+        <IconButton onClick={() => handleAdd(product)}>
           <AddShoppingCartIcon />
         </IconButton>
         <NavLink to={`/shop/${product.id}`}>To Item</NavLink>
