@@ -1,6 +1,6 @@
 import { IProduct } from "../ts/interfaces/global_interfaces";
 import { getProduct } from "../controller/handleProducts";
-import { useLoaderData, NavLink, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { Card, CardContent, Typography, Box, Button } from "@mui/material";
 import CartItemContext from "../controller/CartContext";
 import { useContext } from "react";
