@@ -5,7 +5,10 @@ type CartItemContextType = [
   IProduct[] | null,
   Dispatch<SetStateAction<IProduct[]>>,
   handleAdd: (product: IProduct) => void,
-  handleDelete: (product: IProduct) => void
+  handleMinus: (product: IProduct) => void,
+  handleDelete: (product: IProduct) => void,
+  handlePrice: () => number,
+  getCartLength: () => number
 ];
 
 const CartItemContext = createContext<CartItemContextType>([
@@ -13,6 +16,9 @@ const CartItemContext = createContext<CartItemContextType>([
   () => {},
   () => {},
   () => {},
+  () => {},
+  () => 0.0,
+  () => 0,
 ]);
 
 export default CartItemContext;

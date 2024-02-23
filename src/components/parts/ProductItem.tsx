@@ -1,5 +1,12 @@
 import { IProduct } from "../ts/interfaces/global_interfaces";
-import { Typography, Card, CardContent, IconButton, Grid } from "@mui/material";
+import {
+  Typography,
+  Card,
+  CardContent,
+  IconButton,
+  Grid,
+  Button,
+} from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
@@ -26,13 +33,15 @@ export default function ProductItem({ product }: Props) {
             {product.title}
           </Typography>
           <Typography component="h2" variant="h6">
-            {`€ ${product.price}`}
+            {`€ ${product.price?.toFixed(2)}`}
           </Typography>
         </CardContent>
         <IconButton onClick={() => handleAdd(product)}>
           <AddShoppingCartIcon />
         </IconButton>
-        <NavLink to={`/shop/${product.id}`}>To Item</NavLink>
+        <NavLink to={`/shop/${product.id}`} style={{ textDecoration: "none" }}>
+          <Button variant="contained">To Item</Button>
+        </NavLink>
       </Card>
     </Grid>
   );

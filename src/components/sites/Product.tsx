@@ -1,6 +1,6 @@
 import { IProduct } from "../ts/interfaces/global_interfaces";
 import { getProduct } from "../controller/handleProducts";
-import { useLoaderData, NavLink } from "react-router-dom";
+import { useLoaderData, NavLink, useNavigate } from "react-router-dom";
 import { Card, CardContent, Typography, Box, Button } from "@mui/material";
 import CartItemContext from "../controller/CartContext";
 import { useContext } from "react";
@@ -19,8 +19,9 @@ export async function loader({ params }: { params: { id: string } }) {
 }
 
 export default function ProductDetail() {
-  const { product } = useLoaderData();
+  const { product } = useLoaderData() as any;
   const [, , handleAdd] = useContext(CartItemContext);
+  const navigate = useNavigate();
 
   return (
     <Card>
@@ -29,13 +30,21 @@ export default function ProductDetail() {
           <img src={product.image} width={300} />
         </Box>
         <Box>
-          <Typography>{product.title}</Typography>
+          <Typography variant="h5" mb={5}>
+            {product.title}
+          </Typography>
           <Typography>{product.description}</Typography>
-          <Typography>{`€ ${product.price}`}</Typography>
-          <Button onClick={() => handleAdd(product)}>Add to Cart</Button>
-          <NavLink to={"/shop"}>
-            <Button>Back to Shop</Button>
-          </NavLink>
+          <Typography
+            mt={15}
+            mb={10}
+            variant="h4"
+          >{`€ ${product.price}`}</Typography>
+          <Button variant="contained" onClick={() => handleAdd(product)}>
+            Add to Cart
+          </Button>
+          <Button variant="contained" onClick={() => navigate(-1)}>
+            Back
+          </Button>
         </Box>
       </CardContent>
     </Card>
